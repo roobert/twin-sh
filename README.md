@@ -21,11 +21,11 @@ This wizard does the following:
   * update
 4. Asks for a name for your contribution depending on type
 5. Creates a copy of the post-type template and updates the title, if required
-6. Opens an editor for any adjustments to be made
-7. Displays a preview of the post to be committed
-8. Asks for confirmation before committing your post
+6. Open an editor for any adjustments to be made
+7. Display a preview of the post to be committed
+8. Ask for confirmation before committing your post
 9. Push the changes
-10. Creates a PR against `phaazon/this-week-in-neovim-contents:<this-weeks-branch>`
+10. Create a PR against `phaazon/this-week-in-neovim-contents:<this-weeks-branch>`
 
 ## :heart: Todo
 
