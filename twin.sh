@@ -74,7 +74,7 @@ function process_template() {
 		1-need-help
 		2-guides
 		3-new-plugins
-		4-new-projects
+		4-updates
 	)
 
 	while true; do
@@ -127,9 +127,9 @@ function process_template() {
 		NAME="${UPDATE_NAME}"
 		;;
 
-	1-need-help | 3-new-plugins | 4-new-projects)
+	1-need-help | 3-new-plugins | 4-updates)
 		while true; do
-			read -r -p "Enter the plugin name (e.g: my-new-plugin.nvim): " PLUGIN_NAME
+			read -r -p "Enter a hyphenated name to be used (e.g: my-new-plugin.nvim): " PLUGIN_NAME
 			if [[ -n "${PLUGIN_NAME}" ]]; then
 				break
 			fi
