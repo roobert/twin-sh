@@ -26,5 +26,4 @@ This wizard does the following:
 ## :heart: Todo
 
 * Try to establish the number to use to prefix the post filename
-* Create a new local branch for each PR to support multiple PRs per week
 * More testing
