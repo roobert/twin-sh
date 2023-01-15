@@ -135,9 +135,8 @@ function process_template() {
 
 		POST_FILE="${OUTPUT_DIR}/${PLUGIN_NAME}.md"
 
-		sed "s/your-plugin.nvim/${PLUGIN_NAME}/g" "${POST_TEMPLATE}" |
-			sed "s/your-plugin/${PLUGIN_NAME}/g" "${POST_TEMPLATE}" \
-				>"${POST_FILE}"
+		sed "s/your-plugin.nvim/${PLUGIN_NAME}/g" "${POST_TEMPLATE}" \
+			>"${POST_FILE}"
 
 		NAME="${PLUGIN_NAME}"
 		;;
