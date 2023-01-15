@@ -1,5 +1,5 @@
 # This Week in NeoVIM - Contribution Wizard
 
 ```
-curl | bash
+bash <(curl -s https://raw.githubusercontent.com/roobert/twin-sh/main/twin.sh)
 ```
