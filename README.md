@@ -1,5 +1,7 @@
 # :magic_wand: This Week in NeoVIM - Contribution Wizard
 
+![twin demo](https://user-images.githubusercontent.com/226654/212549801-adf7610c-0e01-4510-92b3-8db76c05405f.gif)
+
 ## :rocket: Usage
 
 ```
