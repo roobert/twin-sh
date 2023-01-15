@@ -1,7 +1,6 @@
 # :magic_wand: This Week in NeoVIM - Contribution Wizard
 
-![twin demo](https://user-images.githubusercontent.com/226654/212550237-8c8b6dc5-16c6-494c-911c-6e61fac12a14.gif)
-
+![twin demo](https://user-images.githubusercontent.com/226654/212550615-d8b977f1-6cf8-44ab-a325-d67a1ecb96c6.gif)
 
 ## :rocket: Usage
 
