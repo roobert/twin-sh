@@ -1,10 +1,12 @@
-# This Week in NeoVIM - Contribution Wizard
+# :magic_wand: This Week in NeoVIM - Contribution Wizard
+
+## :rocket: Usage
 
 ```
 bash <(curl -s https://raw.githubusercontent.com/roobert/twin-sh/main/twin.sh)
 ```
 
-## Description
+## :hammer-and-wrench: Description
 
 This wizard does the following:
 1. Creates a fork of `phaazon/this-week-in-neovim-contents`
