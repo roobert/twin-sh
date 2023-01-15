@@ -6,7 +6,7 @@
 bash <(curl -s https://raw.githubusercontent.com/roobert/twin-sh/main/twin.sh)
 ```
 
-## :hammer-and-wrench: Description
+## :hammer_and_wrench: Description
 
 This wizard does the following:
 1. Creates a fork of `phaazon/this-week-in-neovim-contents`
