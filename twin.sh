@@ -200,9 +200,10 @@ function process_template() {
 				echo
 				echo "git add ${POST_FILE}"
 				echo "git commit -m \"[${ABBREVIATED_POST_TYPE}] Added ${NAME}\""
-				echo "git push"
+				echo "git push origin \"${LATEST_BRANCH}\""
 				echo "gh pr create --fill"
 				echo "gh pr create --fill --head \"${GIT_USER}:${LATEST_BRANCH}\""
+				echo "gh pr --repo \"phaazon/this-week-in-neovim-contents\" create --fill --head \"${GIT_USER}:${LATEST_BRANCH}\" -B \"${LATEST_BRANCH}\""
 				echo
 				exit 1
 			else
@@ -218,8 +219,8 @@ function process_template() {
 
 	git add "${POST_FILE}"
 	git commit -m "[${ABBREVIATED_POST_TYPE}] Added ${NAME}"
-	git push
-	gh pr create --fill --head "${GIT_USER}:${LATEST_BRANCH}"
+	git push origin "${LATEST_BRANCH}"
+	gh pr --repo phaazon/this-week-in-neovim-contents create --fill --head "${GIT_USER}:${LATEST_BRANCH}" -B "${LATEST_BRANCH}"
 }
 
 function main() {
