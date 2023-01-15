@@ -1,8 +1,5 @@
 #!/usr/bin/env bash
-#
-# TODO:
-# * fix git pr when testable..
-#
+
 set -euo pipefail
 
 function header() {
@@ -24,6 +21,7 @@ function check_dependencies() {
 
 function fork_twin_repo() {
 	echo "Forking this-week-in-neovim-contents repository..."
+
 	if [ -d this-week-in-neovim-contents ]; then
 		echo "this-week-in-neovim-contents directory already exists!"
 		read -r -p "Do you want to delete it? [y/N] "
@@ -41,6 +39,7 @@ function fork_twin_repo() {
 # FIXME: improve this..
 function latest_branch() {
 	local LATEST_BRANCH
+
 	LATEST_BRANCH=$(
 		git branch -l -r --no-color |
 			tr -d ' ' |
@@ -48,7 +47,6 @@ function latest_branch() {
 			grep -v '/master'
 	)
 
-	# ensure only one branch is returned
 	if [[ $(echo "${LATEST_BRANCH}" | wc -l) -eq 1 ]]; then
 		echo "${LATEST_BRANCH}" | sed 's/upstream\///'
 	else
@@ -89,7 +87,6 @@ function process_template() {
 		done
 
 		read -r -p "Enter a number: " POST_TYPE_INDEX
-
 		if [[ "$POST_TYPE_INDEX" =~ ^[0-9]+$ ]]; then
 			if [[ "$POST_TYPE_INDEX" -ge 0 && "$POST_TYPE_INDEX" -le 4 ]]; then
 				break
@@ -116,10 +113,13 @@ function process_template() {
 			if [[ -n "${UPDATE_NAME}" ]]; then
 				break
 			fi
+
 			echo "Invalid input"
 		done
+
 		POST_FILE="${OUTPUT_DIR}/${UPDATE_NAME}.md"
 		cp -v "${POST_TEMPLATE}" "${POST_FILE}"
+
 		NAME="${UPDATE_NAME}"
 		;;
 
@@ -129,13 +129,17 @@ function process_template() {
 			if [[ -n "${PLUGIN_NAME}" ]]; then
 				break
 			fi
+
 			echo "Invalid input"
 		done
+
 		POST_FILE="${OUTPUT_DIR}/${PLUGIN_NAME}.md"
+
 		sed "s/your-plugin.nvim/${PLUGIN_NAME}/g" "${POST_TEMPLATE}" \
 			>"${POST_FILE}"
 		sed "s/your-plugin/${PLUGIN_NAME}/g" "${POST_TEMPLATE}" \
 			>"${POST_FILE}"
+
 		NAME="${PLUGIN_NAME}"
 		;;
 
@@ -145,11 +149,15 @@ function process_template() {
 			if [[ -n "${CONTENT_NAME}" ]]; then
 				break
 			fi
+
 			echo "Invalid input"
 		done
+
 		POST_FILE="${OUTPUT_DIR}/${CONTENT_NAME}.md"
+
 		sed "s/your-content/${CONTENT_NAME}/g" "${POST_TEMPLATE}" \
 			>"${POST_FILE}"
+
 		NAME="${CONTENT_NAME}"
 		;;
 
@@ -181,19 +189,20 @@ function process_template() {
 		if [[ $REPLY =~ ^[Yy]$ ]]; then
 			break
 		elif [[ $REPLY =~ ^[Nn]$ ]]; then
-			# would you lik to re-dit?
 			read -r -p "Would you like to re-edit your post? [y/n] "
 			if [[ $REPLY =~ ^[Yy]$ ]]; then
 				continue
 			elif [[ $REPLY =~ ^[Nn]$ ]]; then
 				ABBREVIATED_POST_TYPE="$(echo "${POST_TYPE}" | cut -d- -f2- | sed 's/s$//')"
+				GIT_USER="$(git remote get-url origin | cut -d: -f2 | cut -d'/' -f1)"
 				echo
 				echo "Please run the following to finish your post:"
 				echo
 				echo "git add ${POST_FILE}"
-				echo "git commit -m [${ABBREVIATED_POST_TYPE}] Added ${NAME}"
+				echo "git commit -m \"[${ABBREVIATED_POST_TYPE}] Added ${NAME}\""
 				echo "git push"
 				echo "gh pr create --fill"
+				echo "gh pr create --fill --head \"${GIT_USER}:${LATEST_BRANCH}\""
 				echo
 				exit 1
 			else
@@ -205,11 +214,12 @@ function process_template() {
 	done
 
 	ABBREVIATED_POST_TYPE="$(echo "${POST_TYPE}" | cut -d- -f2- | sed 's/s$//')"
+	GIT_USER="$(git remote get-url origin | cut -d: -f2 | cut -d'/' -f1)"
 
 	git add "${POST_FILE}"
 	git commit -m "[${ABBREVIATED_POST_TYPE}] Added ${NAME}"
 	git push
-	gh pr create --fill
+	gh pr create --fill --head "${GIT_USER}:${LATEST_BRANCH}"
 }
 
 function main() {
