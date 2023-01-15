@@ -119,6 +119,7 @@ function process_template() {
 		done
 
 		LOCAL_BRANCH="${LATEST_BRANCH}-${UPDATE_NAME}"
+		echo
 		git checkout -b "${LOCAL_BRANCH}"
 
 		POST_FILE="${OUTPUT_DIR}/${UPDATE_NAME}.md"
@@ -138,6 +139,7 @@ function process_template() {
 		done
 
 		LOCAL_BRANCH="${LATEST_BRANCH}-${PLUGIN_NAME}"
+		echo
 		git checkout -b "${LOCAL_BRANCH}"
 
 		POST_FILE="${OUTPUT_DIR}/${PLUGIN_NAME}.md"
@@ -159,6 +161,7 @@ function process_template() {
 		done
 
 		LOCAL_BRANCH="${LATEST_BRANCH}-${CONTENT_NAME}"
+		echo
 		git checkout -b "${LOCAL_BRANCH}"
 
 		POST_FILE="${OUTPUT_DIR}/${CONTENT_NAME}.md"
@@ -190,7 +193,9 @@ function process_template() {
 			done
 		fi
 
+		echo
 		echo "Contents of file: ${POST_FILE}"
+		echo
 		cat "${POST_FILE}"
 
 		read -r -p "Would you like commit your new post? [y/n] "
