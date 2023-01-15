@@ -21,5 +21,10 @@ This wizard does the following:
 7. Displays a preview of the post to be committed
 8. Asks for confirmation before committing your post
 9. Push the changes
-10. Creates a PR against `phaazon/this-week-in-neovim-contents`
+10. Creates a PR against `phaazon/this-week-in-neovim-contents:<this-weeks-branch>`
 
+## :heart: Todo
+
+* Try to establish the number to use to prefix the post filename
+* Create a new local branch for each PR to support multiple PRs per week
+* More testing
