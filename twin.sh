@@ -105,6 +105,7 @@ function process_template() {
 	OUTPUT_DIR="contents/${YEAR}/${MONTH}/${DAY}/${POST_TYPE}"
 	POST_FILE=""
 	NAME=""
+	LOCAL_BRANCH=""
 
 	case "${POST_TYPE}" in
 	0-core-updates)
@@ -116,6 +117,9 @@ function process_template() {
 
 			echo "Invalid input"
 		done
+
+		LOCAL_BRANCH="${LATEST_BRANCH}-${UPDATE_NAME}"
+		git checkout -b "${LOCAL_BRANCH}"
 
 		POST_FILE="${OUTPUT_DIR}/${UPDATE_NAME}.md"
 		cp -v "${POST_TEMPLATE}" "${POST_FILE}"
@@ -132,6 +136,9 @@ function process_template() {
 
 			echo "Invalid input"
 		done
+
+		LOCAL_BRANCH="${LATEST_BRANCH}-${PLUGIN_NAME}"
+		git checkout -b "${LOCAL_BRANCH}"
 
 		POST_FILE="${OUTPUT_DIR}/${PLUGIN_NAME}.md"
 
@@ -150,6 +157,9 @@ function process_template() {
 
 			echo "Invalid input"
 		done
+
+		LOCAL_BRANCH="${LATEST_BRANCH}-${CONTENT_NAME}"
+		git checkout -b "${LOCAL_BRANCH}"
 
 		POST_FILE="${OUTPUT_DIR}/${CONTENT_NAME}.md"
 
@@ -199,10 +209,8 @@ function process_template() {
 				echo "git add ${POST_FILE}"
 				echo "git commit -m \"[${ABBREVIATED_POST_TYPE}] Added ${NAME}\""
 				echo "git push origin \"${LATEST_BRANCH}\""
-				echo "gh pr create --fill"
-				echo "gh pr create --fill --head \"${GIT_USER}:${LATEST_BRANCH}\""
 				echo "gh pr --repo \"phaazon/this-week-in-neovim-contents\" \\"
-				echo "  create --fill --head \"${GIT_USER}:${LATEST_BRANCH}\" -B \"${LATEST_BRANCH}\""
+				echo "  create --fill --head \"${GIT_USER}:${LOCAL_BRANCH}\" -B \"${LATEST_BRANCH}\""
 				echo
 				exit 1
 			else
@@ -218,9 +226,9 @@ function process_template() {
 
 	git add "${POST_FILE}"
 	git commit -m "[${ABBREVIATED_POST_TYPE}] Added ${NAME}"
-	git push origin "${LATEST_BRANCH}"
+	git push origin "${LOCAL_BRANCH}"
 	gh pr --repo phaazon/this-week-in-neovim-contents \
-		create --fill --head "${GIT_USER}:${LATEST_BRANCH}" -B "${LATEST_BRANCH}"
+		create --fill --head "${GIT_USER}:${LOCAL_BRANCH}" -B "${LATEST_BRANCH}"
 }
 
 function main() {
